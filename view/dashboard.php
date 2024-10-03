@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
   <head>
     <meta charset="utf-8" />
@@ -44,8 +45,10 @@
   </head>
   <body>
     <div id="sidebar">
+      <?php session_start()?>
       <h2>User Dashboard</h2>
-      <a href="#">Profile</a>
+      <h1>Session id <?php echo $_SESSION['user_id'];?> </h1>
+      <a href="./profile.php">Profile</a>
       <a href="#">Orders</a>
       <a href="#">Settings</a>
     </div>
@@ -105,7 +108,8 @@
   <body>
     <div id="sidebar">
       <h2>User Dashboard</h2>
-      <a href="#">Profile</a>
+      <h1>Session id</h1>
+      <a href="../view/profile.php">Profile</a>
       <a href="#">Orders</a>
       <a href="#">Settings</a>
     </div>

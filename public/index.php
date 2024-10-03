@@ -1,7 +1,7 @@
 <?php
 
-require '../app/model/database.php';
 
+require dirname(__DIR__) .'/database.php';
 // $allEmails = $db->getAllEmail();
 
 // $allEmail = $db->getEmail("epic@gail.com");

@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-
+session_start();
 //require_once './database.php';
 
  require dirname(__DIR__) .'/database.php';
@@ -45,17 +45,21 @@ $actualemail = $db->getEmail($email);
    {
       //check if password is same
       if($actualemail['psword'] === $pas){
-        session_start();
+       
 
 $_SESSION['user_id'] = $actualemail['user_id'];
 $_SESSION['email']   = $email;
 $_SESSION['time']    = time();
 
+
+echo $_SESSION['email'];
+echo $_SESSION['time'];
+
 header('Location: \vitovinyl\view\dashboard.php');
           echo 'Passwords are same';
-          //push to database
+echo $_SESSION['user_id'];
       }else{
-         ///push to loginpage
+   
          header('Location: \vitovinyl\view\login.php');
           echo 'passwords are not same';
       }
