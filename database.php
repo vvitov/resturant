@@ -57,23 +57,13 @@ class dbh{
     }
     public function updateBoth($firstname,$lastname,$id)
     {
-    //   $data = [
-    //     'name' => $firstname,
-    //     'surname' => $lastname,
-    //     'id' => $id,
-    // ];
-      
-      //UPDATE customer set user_id = 2 where email = "j@gmail";
-        //$sql = "UPDATE users SET fname=?,lname=?,WHERE user_id=?";
-        //$stmt = $this->connect()->prepare($sql);
-        //$stmt->execute([$firstname,$lastname,$id]);
-        //UPDATE `users` SET `fname`='big',`lname`='shrk' WHERE `user_id`=3;
-        //$query = "UPDATE users set fname=$firstname,lname=$lastname WHERE user_id=$id";
-        // $query ="UPDATE `users` SET `fname`=$firstname,`lname`=$lastname WHERE `user_id`=$id;";
-        // $stmt = $this->connect()->prepare($query)->execute();
-        //$sql = "UPDATE users SET fname=:name, lname=:surname, WHERE id=:id";
         $sql = "UPDATE users SET fname=?, lname=?  WHERE user_id=?";
          $this->connect()->prepare($sql)->execute([$firstname,$lastname,$id]);
+    }
+    public function getRole($id){
+        $sql = "SELECT * from user where user_id =?";
+        $result = $this->connect()->prepare($sql)->execute([$id]);
+        return $result['role'];
     }
 }
 

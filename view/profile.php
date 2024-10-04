@@ -62,8 +62,10 @@ button:hover, a:hover {
    
    $users = $db->getEmail($email);
    
-   
+   $id = $_SESSION['user_id'];
+   $role = $db->getRole($id);
   ?>
+  <h1><?php echo $role?></h1>
   <img src="../images/default-pfp-32.jpg" alt="John" style="width:100%">
   
   <h1><?php echo $users['fname']. $users['lname'] ?></h1>
