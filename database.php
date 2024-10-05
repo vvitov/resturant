@@ -1,17 +1,18 @@
 <?php
-
+//should only carry connect and core database functions sign up should be for both 
+//client 
 class dbh{
     private $user = 'root';
     private $password = '';
      
-    public function connect(){
+    public function connect():object{
          try {
             return $dbh =new PDO('mysql:host=localhost;dbname=vitovinyl', $this->user, $this->password);
          } catch (PDOException $e) {
              die($e->getmessage());
          }
     }
-    public function getAllEmail(){
+    public function getAllEmail():array{
         //return all emails
         $users = [];
         $stmt = $this->connect()->prepare("SELECT * FROM users");
