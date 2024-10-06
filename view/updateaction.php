@@ -1,9 +1,9 @@
 <?php
 
-require dirname(__DIR__) .'/database.php';
+require dirname(__DIR__) .'/clientdatabase.php';
 session_start();
 
-$db = new dbh();
+$client = new client();
 
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
@@ -12,29 +12,22 @@ $email = $_SESSION['email'];
 
 if($_SERVER['REQUEST_METHOD']==='POST')
 {
-     $users = $db->getEmail($email);
+     $users = $client->getEmail($email);
 
      if($firstname && $lastname)
      {  
-        $data = [
-            'name' => $firstname,
-            'surname' => $lastname,
-            'id' => $userid,
-        ];
-        
-         //call the function to update both
-        // $db->updateBoth($firstname,$lastname,$userid);
-        $db->updateBoth($firstname,$lastname,$userid);
+       
+        $client->updateBoth($firstname,$lastname,$userid);
          echo "BOTH NAMES UPDATED";
      }
      elseif($firstname)
      {
-         $db->updateFirstname($firstname,$userid);
+         $client->updateFirstname($firstname,$userid);
          echo "Firstname updated";
      }
      elseif($lastname)
      {
-          $db->updateLastname($lastname,$userid);
+          $client->updateLastname($lastname,$userid);
           echo "Lastname updated";
      }
 

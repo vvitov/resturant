@@ -5,10 +5,10 @@ session_start();
 //require_once './database.php';
 
  require dirname(__DIR__) .'/database.php';
- require dirname(__DIR__) .'/admindatabase.php';
+ require dirname(__DIR__) .'/clientdatabase.php';
  
  $db = new dbh();
- $admin = new admin();
+ $client = new client();
 $username = 'root';
 $dbpassword = '';
 
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
    }
 
   
-$actualemail = $admin->getEmail($email);
+$actualemail = $client->getEmail($email);
    if($actualemail['email'])
    {
       //check if password is same

@@ -48,9 +48,9 @@ button:hover, a:hover {
 
 <div class="card">
   <?php session_start();
-    require dirname(__DIR__) .'/database.php';
+    require dirname(__DIR__) .'/clientdatabase.php';
 
-    $db = new dbh();
+    $client = new client();
    
     
    
@@ -60,7 +60,7 @@ button:hover, a:hover {
    
    //call a function that get
    
-   $users = $db->getEmail($email);
+   $user = $client->getEmail($email);
    
    $id = $_SESSION['user_id'];
    $role = $db->getRole($id);
@@ -68,8 +68,8 @@ button:hover, a:hover {
   <h1><?php echo $role?></h1>
   <img src="../images/default-pfp-32.jpg" alt="John" style="width:100%">
   
-  <h1><?php echo $users['fname']. $users['lname'] ?></h1>
-  <p class="title"><?php echo $users['role'] ?></p>
+  <h1><?php echo $user['fname']. $user['lname'] ?></h1>
+  <p class="title"><?php echo $user['role'] ?></p>
   <a href="../view/upload.php"><i class="fa fa-cloud"></i></a>
   <a href="../view/update.php"><i class="fa fa-pencil"></i></a>
   <p>
