@@ -1,6 +1,6 @@
 <?php
 
-require dirname(__DIR__) .'/clientdatabase.php';
+require '../database/client.php';
 session_start();
 
 $client = new client();

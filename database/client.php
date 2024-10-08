@@ -1,6 +1,6 @@
 <?php
 
-require dirname(__DIR__) .'/database.php';
+require '../database/database.php';
 //should only call client function
 //
 class client extends dbh{
@@ -25,9 +25,22 @@ public function updateBoth($firstname, $lastname, $id)
 }
 public function getEmail($email)
 {
-    $sql = "SELECT * from users where email = ?";
-    $stmt = $this->connect()->prepare($sql);
-    $userEmail = $stmt->execute([$email]);
-    return $userEmail;
+$sth = $this->connect()->prepare("SELECT * from users where email=?");
+$sth->execute([$email]);
+$result = $sth->fetch(PDO::FETCH_ASSOC);
+ return $result;
+}
+public function getRole($id){
+    $sth = $this->connect()->prepare("SELECT * from users where user_id = ?");
+    $sth->execute([$id]);
+    $result = $sth->fetch(PDO::FETCH_ASSOC);
+    return $result['usertype'];
+   //return the role
+//    sql = "SELECT * FROM users WHERE id=1";
+//    $sth = $this->connect()->prepare($sql);
+//    $sth->execute([$id]);
+//    $result = $sth->fetch(PDO::FETCH_ASSOC);
+//    return $result['role'];
+//return $id;
 }
 }

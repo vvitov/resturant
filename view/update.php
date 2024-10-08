@@ -75,9 +75,9 @@ input[type=submit] {
 <body>
     <?php 
        session_start();
-       require dirname(__DIR__) .'/database.php';
+       require  '../database/client.php';
    
-       $db = new dbh();
+       $client = new client();
       
        
       
@@ -87,7 +87,7 @@ input[type=submit] {
       
       //call a function that get
       
-      $users = $db->getEmail($email);
+      $users = $client->getEmail($email);
       $imagelink = $users['image'];
     ?>
 <div class="container">
