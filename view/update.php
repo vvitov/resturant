@@ -88,7 +88,7 @@ input[type=submit] {
       //call a function that get
       
       $users = $client->getEmail($email);
-      $imagelink = $users['image'];
+      $imagelink = $users['profimage'];
     ?>
 <div class="container">
   <form action="./updateaction.php" method="post">
@@ -114,7 +114,7 @@ input[type=submit] {
       </div>
       <div class="col-75">
         
-        <?php if($users['image']) 
+        <?php if($users['profimage']) 
          echo "<img src='$imagelink' alt='$imagelink'>";
          else 
          echo '<img src="../images/default-pfp-32.jpg" alt="">';

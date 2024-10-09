@@ -1,17 +1,25 @@
 <?php
-   echo "<b>File to be uploaded: </b>" . $_FILES["uploadfile"]["name"] . "<br>";
-   echo "<b>Type: </b>" . $_FILES["uploadfile"]["type"] . "<br>";
-   echo "<b>File Size: </b>" . $_FILES["uploadfile"]["size"]/1024 . "<br>";
-   echo "<b>Store in: </b>" . $_FILES["uploadfile"]["tmp_name"] . "<br>";
+session_start();
+$id = $_SESSION['user_id'];
+require '../database/client.php';
+ $filename = $_FILES["userfile"]["name"]; 
+ $tempname = $_FILES["userfile"]["tmp_name"];
+  $folder = "image/".$filename;  
+$uploaddir = '/var/www/uploads/';
+$uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
+ 
+$client = new client();
+echo '<pre>';
+if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
+    $client->uploadImage($filename,$id);
+   echo "File is valid, and was successfully uploaded.\n";
+} else {
+    echo "Possible file upload attack!\n";
+}
 
-   if (file_exists($_FILES["uploadfile"]["name"])){
-      echo "<h3>The file already exists</h3>";
-   } else {
-      move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $_FILES["uploadfile"]["name"]);
-      if(move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $_FILES["uploadfile"]["name"]))
-      {
-        echo "<h3>File Successfully Uploaded</h3>";
-      }
-     
-   }
+echo 'Here is some more debugging info:';
+print_r($_FILES);
+
+print "</pre>";
+var_dump($uploadfile);
 ?>

@@ -35,12 +35,16 @@ public function getRole($id){
     $sth->execute([$id]);
     $result = $sth->fetch(PDO::FETCH_ASSOC);
     return $result['usertype'];
-   //return the role
-//    sql = "SELECT * FROM users WHERE id=1";
-//    $sth = $this->connect()->prepare($sql);
-//    $sth->execute([$id]);
-//    $result = $sth->fetch(PDO::FETCH_ASSOC);
-//    return $result['role'];
-//return $id;
+
+}
+public function uploadImage($name,$id){
+     //call the connection
+     //sql
+    //$sql = "Update users set image= ? where user_id = ?";
+   // $sql ="UPDATE users SET profimage=? WHERE user_id = ? AND usertype=visitor";
+    $sql = "UPDATE users SET profimage=? WHERE user_id=?"; 
+   $sth = $this->connect()->prepare($sql);
+    $sth->execute([$name,$id]);
+    
 }
 }
