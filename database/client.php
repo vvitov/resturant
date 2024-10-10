@@ -42,9 +42,72 @@ public function uploadImage($name,$id){
      //sql
     //$sql = "Update users set image= ? where user_id = ?";
    // $sql ="UPDATE users SET profimage=? WHERE user_id = ? AND usertype=visitor";
-    $sql = "UPDATE users SET profimage=? WHERE user_id=?"; 
-   $sth = $this->connect()->prepare($sql);
-    $sth->execute([$name,$id]);
+//     $sql = "UPDATE profileImages SET pImage=? WHERE user_id=?"; 
+//    $sth = $this->connect()->prepare($sql);
+//     $sth->execute([$name,$id]);
     
+}
+public function ImageExist($id){
+    $sql = "SELECT * FROM profileimages WHERE user_id = $id";
+    
+    $result = $this->connect()->query($sql);
+    if($result){
+        return true;
+    }else{
+        return false;
+    }
+}
+public function insertNewImage($id,$name){
+    $sql = "INSERT into profileimages(user_id,pImage) values ('$id','$name')";
+    $sth= $this->connect()->prepare($sql);
+    $sth->execute();
+}
+public function inserTimage($id,$name){
+    //check for image first and delete 
+      
+   
+    $imageexistence = $this->ImageExist($id);
+   if($imageexistence){
+     //delete the execute
+     $this->deleteImage($id);
+      $this->insertNewImage($id,$name);
+   }else{
+    
+       $this->insertNewImage($id,$name);
+   }
+
+     
+}
+public function getprofileImage($id){
+    // $sql = "SELECT * from users where user_id =?";
+    // $sth = $this->connect()->prepare($sql)->execute([$id]);
+    // $result = $sth->fetch();
+    // return $result;
+
+    //delete image first and delete
+    //delete first and download
+   //check if it exist 
+
+    $sql = "SELECT * FROM profileimages WHERE user_id = $id";
+    
+    $result = $this->connect()->query($sql);
+    
+    if ($result) {
+        //delete it and put
+       
+
+        $data = $result->fetch();
+        return $data['pImage'];
+    } else {
+        // Handle query failure, e.g., log the error
+        echo "Query failed!";
+    }
+    
+}
+public function deleteImage($id)
+{
+    $sql = "DELETE FROM profileimages WHERE user_id=?;";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
 }
 }

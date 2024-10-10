@@ -84,11 +84,12 @@ input[type=submit] {
       echo 'welcome' .' ' .$_SESSION['email'];
       
       $email = $_SESSION['email'];
-      
+      $id = $_SESSION['user_id'];
       //call a function that get
       
       $users = $client->getEmail($email);
-      $imagelink = $users['profimage'];
+      //$imagelink = $users['profimage'];
+      $imagelink = $client->getprofileImage($id);
     ?>
 <div class="container">
   <form action="./updateaction.php" method="post">
@@ -115,7 +116,8 @@ input[type=submit] {
       <div class="col-75">
         
         <?php if($users['profimage']) 
-         echo "<img src='$imagelink' alt='$imagelink'>";
+        echo "<img src='http://localhost/vitovinyl/Images/".$imagelink."'>";
+         
          else 
          echo '<img src="../images/default-pfp-32.jpg" alt="">';
         ?>
