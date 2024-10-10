@@ -71,6 +71,7 @@ public function inserTimage($id,$name){
      //delete the execute
      $this->deleteImage($id);
       $this->insertNewImage($id,$name);
+      $this->changeImagename($id,$name);
    }else{
     
        $this->insertNewImage($id,$name);
@@ -79,14 +80,6 @@ public function inserTimage($id,$name){
      
 }
 public function getprofileImage($id){
-    // $sql = "SELECT * from users where user_id =?";
-    // $sth = $this->connect()->prepare($sql)->execute([$id]);
-    // $result = $sth->fetch();
-    // return $result;
-
-    //delete image first and delete
-    //delete first and download
-   //check if it exist 
 
     $sql = "SELECT * FROM profileimages WHERE user_id = $id";
     
@@ -109,5 +102,27 @@ public function deleteImage($id)
     $sql = "DELETE FROM profileimages WHERE user_id=?;";
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute([$id]);
+}
+public function getImageName($id)
+{
+    ///return the name of image
+    $sql = "SELECT * from users where user_id = $id";
+    $result = $this->connect()->query($sql);
+    return $result['profimage'];
+ 
+}
+
+public function changeImagename($id,$name)
+{  
+
+$sql = "UPDATE users SET profimage = :profimage WHERE user_id = :user_id";
+
+
+$stmt = $this->connect()->prepare($sql);
+
+// Bind parameters
+$stmt->bindParam(':profimage', $name);
+$stmt->bindParam(':user_id', $id, PDO::PARAM_INT);
+$stmt->execute();
 }
 }
