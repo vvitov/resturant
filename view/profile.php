@@ -40,6 +40,10 @@ a {
 button:hover, a:hover {
   opacity: 0.7;
 }
+.profileimagesize{
+  width: 100%;
+  height: 200px;
+}
  </style>
 </head>
 <body>
@@ -65,10 +69,15 @@ button:hover, a:hover {
    
    $id = $_SESSION['user_id'];
    $role = $client->getRole($id);
+
+   $imagelink = $client->getprofileImage($id);
+      
+   $image_path = "../images/" .$imagelink;
   ?>
   <h1><?php echo $role?></h1>
-  <img src="../images/default-pfp-32.jpg" alt="John" style="width:100%">
   
+  <?php echo '<img src="../images/default-pfp-32.jpg" alt="" style="width:100%">'; ?>
+  <img src="<?php echo $image_path ?>" alt="Avatar" class="profileimagesize" >
   <h1><?php echo $user['fname']. $user['lname'] ?></h1>
   <p class="title"><?php echo $user['usertype'] ?></p>
   <a href="../view/upload.php"><i class="fa fa-cloud"></i></a>

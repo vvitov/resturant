@@ -62,6 +62,10 @@ input[type=submit] {
   display: table;
   clear: both;
 }
+.profileimagesize{
+  max-height:180px;
+  width:130px;
+}
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
@@ -79,7 +83,7 @@ input[type=submit] {
    
        $client = new client();
       
-       
+     
       
       echo 'welcome' .' ' .$_SESSION['email'];
       
@@ -90,6 +94,9 @@ input[type=submit] {
       $users = $client->getEmail($email);
       //$imagelink = $users['profimage'];
       $imagelink = $client->getprofileImage($id);
+      
+      $image_path = "../images/" .$imagelink;
+      echo $image_path;
     ?>
 <div class="container">
   <form action="./updateaction.php" method="post">
@@ -115,12 +122,12 @@ input[type=submit] {
       </div>
       <div class="col-75">
         
-        <?php if($users['profimage']) 
-        echo "<img src='http://localhost/vitovinyl/Images/".$imagelink."'>";
-         
-         else 
-         echo '<img src="../images/default-pfp-32.jpg" alt="">';
-        ?>
+        <?php if($users['profimage']) ?>
+        <img src="<?php echo $image_path ?>" alt="Avatar" class="profileimagesize">
+
+        
+        <?php echo '<img src="../images/default-pfp-32.jpg" alt="">'; ?>
+        
         
         
       </div>
