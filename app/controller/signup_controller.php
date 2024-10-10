@@ -1,8 +1,8 @@
 <?php
-require '../model/database.php';
+//require './database/database.php';
 //controller should error check 
 //load views
-$db = new db();
+//$db = new dbh();
 class errorcheck{
     private $email;
     private $password;
@@ -10,8 +10,8 @@ class errorcheck{
 
     public function __construct($email,$password,$repeat)
     {
-        $this->email = $this->email;
-        $this->password = $this->password;
+        $this->$email = $this->email;
+        $this->$password = $this->password;
         $this->$repeat = $this->repeat;
     }
     public function emptyField($email,$password,$repeat)
@@ -38,15 +38,15 @@ class errorcheck{
             return false;
         }
     }
-    public function emailExist($email){
-         //this should just call a function from the model and
-         require '../model/database.php';
+    // public function emailExist($email){
+    //      //this should just call a function from the model and
+    //      require './database/database.php';
          
-         if($db->getEmail($email)){
-             return true;
-         }else
-         {
-            return false;
-         }
-    }
+    //      if($db->getEmail($email)){
+    //          return true;
+    //      }else
+    //      {
+    //         return false;
+    //      }
+    // }
 }

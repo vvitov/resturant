@@ -15,6 +15,7 @@ if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadimage)) {
    // $client->uploadImage($filename,$id);
     $client->inserTimage($id,$filename);
    echo "File is valid, and was successfully uploaded.\n";
+   header('Location: \vitovinyl\view\update.php');
 } else {
     echo "Possible file upload attack!\n";
 }
