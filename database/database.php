@@ -41,6 +41,47 @@ class dbh{
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     return $user['user_id'];
     }
-  
+    public function getRole($id){
+        $sth = $this->connect()->prepare("SELECT * from users where user_id = ?");
+        $sth->execute([$id]);
+        $result = $sth->fetch(PDO::FETCH_ASSOC);
+        return $result['usertype'];
+    
+    }
+    public function getAllUsers(): array
+    {
+        $users = [];
+        $sql = "SELECT * FROM users";
+
+        // Prepare and execute the statement
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+
+        // Fetch all results
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Return the list of users
+        return $users;
+       
+    }
+    public function getTableData():array
+    {
+         $users = [];
+         $sql = "SELECT CONCAT(fname, ' ', lname) AS NAME,email ,usertype,user_id FROM users;";
+
+         $stmt = $this->connect()->prepare($sql);
+         $stmt->execute();
+
+         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+         return $users;
+    }
+    public function getUser($userId) {
+        $sql = "SELECT * FROM users WHERE user_id = :id";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
 
