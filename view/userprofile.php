@@ -84,7 +84,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             <p><strong>Email:</strong> <?php echo htmlspecialchars($userEmail); ?></p>
             <p><strong>User Type:</strong> <?php echo htmlspecialchars($userType); ?></p>
         </div>
-        <a href="user_dashboard.php" class="back-link">← Back to Dashboard</a>
+        <a href="./dashboard.php" class="back-link">← Back to Dashboard</a>
         <button>GRANT</button>
         <button>DELETE</button>
     </div>
